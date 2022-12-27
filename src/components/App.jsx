@@ -60,7 +60,7 @@ export class App extends Component {
     );
     return (
       <Wrapper>
-        <h1>Phonebook</h1>
+        <h1>Phoneboo</h1>
         <ContactForm onSubmiting={this.handelSubmit} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.handleChange} />
