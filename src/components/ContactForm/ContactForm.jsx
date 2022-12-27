@@ -1,6 +1,9 @@
-export default function ContactForm({ onSubmit }) {
+import StyledContactForm from './ContactForm.styled';
+import PropTypes from 'prop-types';
+
+export default function ContactForm({ onSubmiting }) {
   return (
-    <form onSubmit={onSubmit}>
+    <StyledContactForm onSubmit={onSubmiting}>
       <label>
         Name
         <input
@@ -22,6 +25,10 @@ export default function ContactForm({ onSubmit }) {
         />
       </label>
       <button type="submit">Add contact</button>
-    </form>
+    </StyledContactForm>
   );
 }
+
+ContactForm.propTypes = {
+  onSubmiting: PropTypes.func.isRequired,
+};

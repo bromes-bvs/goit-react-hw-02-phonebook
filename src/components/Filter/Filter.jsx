@@ -1,8 +1,16 @@
+import StyledFilter from './Filter.styled';
+import PropTypes from 'prop-types';
+
 export default function Filter({ value, onChange }) {
   return (
-    <label>
+    <StyledFilter>
       Finde contacts by name
       <input type="text" name="filter" value={value} onChange={onChange} />
-    </label>
+    </StyledFilter>
   );
 }
+
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};

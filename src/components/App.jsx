@@ -1,17 +1,14 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import initial from '../data.json';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import ContactForm from './ContactForm/ContactForm';
+import Wrapper from './Wrapper/Wrapper.styled';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: initial,
     filter: '',
   };
 
@@ -50,20 +47,30 @@ export class App extends Component {
     this.setState({ filter: value });
   };
 
+  daleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   render() {
     const normalizedFilter = this.state.filter.toLocaleLowerCase();
     const visibleContacts = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
-
     return (
-      <>
+      <Wrapper>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.handelSubmit} />
+        <ContactForm onSubmiting={this.handelSubmit} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.handleChange} />
-        <ContactList contacts={visibleContacts} />
-      </>
+        {visibleContacts.length !== 0 && (
+          <ContactList
+            contacts={visibleContacts}
+            onDeleteContact={this.daleteContact}
+          />
+        )}
+      </Wrapper>
     );
   }
 }
